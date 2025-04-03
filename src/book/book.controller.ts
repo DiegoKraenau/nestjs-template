@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Param,
   Post,
   Put,
@@ -38,5 +39,11 @@ export class BookController {
   @ApiOperation({ summary: 'Update book' })
   async update(@Param('id') id: string, @Body() dto: any) {
     return { message: `Book with ID ${id} updated`, data: dto };
+  }
+
+  @Get()
+  @ApiOperation({ summary: 'Get books' })
+  async get() {
+    return await this.bookService.getAll();
   }
 }

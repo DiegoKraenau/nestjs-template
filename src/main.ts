@@ -8,8 +8,11 @@ async function bootstrap() {
   app.setGlobalPrefix('api/v1');
   const logger = new Logger();
 
-  app.useGlobalPipes(new ValidationPipe());
-
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+    }),
+  );
   const swaggerService = app.get(SwaggerService);
   swaggerService.setup(app);
 
