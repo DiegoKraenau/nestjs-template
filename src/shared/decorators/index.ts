@@ -1,2 +1,2 @@
 export * from './transactional.decorator';
-export * from '../interceptors/tracking.interceptor';
+export * from './auth.decorator';

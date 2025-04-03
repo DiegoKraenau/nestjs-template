@@ -1,6 +1,6 @@
 import { IsString, IsEmail, Length } from 'class-validator';
 
-export class CreateUserDto {
+export class CreateBookDto {
   @IsString()
   @Length(3, 50)
   name: string;

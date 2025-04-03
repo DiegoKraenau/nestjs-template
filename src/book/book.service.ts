@@ -1,24 +1,24 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { User } from './user.entity';
+import { Book } from './book.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Transactional } from 'src/shared/decorators/transactional.decorator';
-import { CreateUserDto } from './dtos';
+import { CreateBookDto } from './dtos';
 import { CustomException } from 'src/domain/custom-exception';
 import { FAILED_ADDED, TRY_AGAIN } from 'src/domain';
 
 @Injectable()
-export class UserService {
+export class BookService {
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    @InjectRepository(Book)
+    private readonly bookRepository: Repository<Book>,
   ) {}
 
   @Transactional()
-  async createUser(dto: CreateUserDto) {
+  async create(dto: CreateBookDto) {
     try {
-      const usuario = this.userRepository.create(dto);
-      return await this.userRepository.save(usuario);
+      const book = this.bookRepository.create(dto);
+      return await this.bookRepository.save(book);
     } catch (error) {
       console.log(error);
       throw new CustomException(

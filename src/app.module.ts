@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './user/user.module';
+import { BookModule } from './book/book.module';
 import { SwaggerService } from './shared/services/swagger.service';
+import { AuditSubscriber } from './shared/subscribers';
 
 @Module({
   imports: [
@@ -18,12 +19,13 @@ import { SwaggerService } from './shared/services/swagger.service';
           autoLoadEntities: true,
           synchronize: true,
           timezone: 'UTC',
+          subscribers: [AuditSubscriber],
         };
       },
     }),
-    UserModule,
+    BookModule,
   ],
   controllers: [],
-  providers: [SwaggerService],
+  providers: [SwaggerService, AuditSubscriber],
 })
 export class AppModule {}
